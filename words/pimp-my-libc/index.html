@@ -1,0 +1,64 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+
+    <title>words - pimp my libc</title>
+
+    <link rel="stylesheet" href="/pub/style/style.css" type="text/css" media="screen, handheld" title="default">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/vnd.microsoft.icon">
+
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
+
+
+
+    
+
+</head>
+<body>
+
+<header>
+    <nav>
+    <div>
+      <a href="https://shrub.industries">products</a> |
+      <a href="https://derivelinux.org">dérive</a> |
+    </div>
+
+    <div>
+      <a href="/sitemap">site map</a>
+    </div>
+
+    </nav>
+    <h1><a href="/">shrub <span id="headerSubTitle">has a website</span></a></h1>
+</header>
+
+    <nav id="side-bar">
+        <div>
+<p class="sideBarTitle">stuff:</p>
+<ul>
+<li><a href="/art/">&rsaquo; art/</a></li>
+<li><a href="/links/">&rsaquo; links/</a></li>
+<li><a href="/words/" class="thisPage">&raquo;<i> words/</i></a></li>
+<li><ul>
+<li><a href="/words/pimp-my-libc" class="thisPage">&raquo;<i> pimp my libc</i></a></li>
+</ul></li>
+</ul>
+        </div>
+    </nav>
+
+<article>
+<p>pimp my libc </p>
+<p>23:39 14 jan 2026 </p>
+<p>musl libc is a great libc, perfect even, pure C99, as god intended, thank you rich felker. you can use it as is, you will be fine, people will tell you the malloc is slow, they are dumb, ignore them. </p>
+<p>anyway, it is fun to fuck around and find out in other peoples codebases, so here i will share with you my adventure in pimping out musl libc. the first thing i did was replace the allocator, malloc-ng is secure and reliable but pretty slow. i choose zelang’s fork of rpmalloc, which is a very simple lock free allocator. it is much faster than malloc-ng, and almost as fast as microsoft’s mimalloc while only being 25%ish codebase size. speed increase from this was very nice as expected, although ram usage is about 8x more on my benchmarks, however the benchmarks do a lot of malloc-ing, so in daily usage it’s actually pretty negligible. </p>
+<p>next on the list was libm, i replaced with stuff from core-math, it was a big headache, and a lot of the functions were slower, but a few of them were faster, although nothing major. then i replaced all string/memory functions with the freebsd implementations, which was a bit more complex to wire up. this was a pretty big speed increase on all fronts, probably due to it using sse2. i wanted to micro-optimize even further, so i added memset, memcpy and memmove from googles bionic libc, because freebsd doesn’t have sse2 for those functions. </p>
+<p>overall, the speed increase is 5-7x on malloc operations, and 1.5-2x on string operations. everything else is a small (but negligible) increase. </p>
+<p>at some point in the future i will add some scientific benchmarks to this post, i’m sorry, i forgot to save them, so you’ll just have to trust me :) </p>
+<p>for those interested, the repo is available at https://codeberg.org/shrub900/shrusl</p>
+
+</article>
+
+<footer>
+<div><a href="http://werc.cat-v.org/">powered by werc</a></div>
+</footer>
+</body></html>
