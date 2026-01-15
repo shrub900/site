@@ -1,0 +1,67 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+
+    <title>words - static linking</title>
+
+    <link rel="stylesheet" href="/pub/style/style.css" type="text/css" media="screen, handheld" title="default">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/vnd.microsoft.icon">
+
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
+
+
+
+    
+
+</head>
+<body>
+
+<header>
+    <nav>
+    <div>
+      <a href="https://shrub.industries">products</a> |
+      <a href="https://derivelinux.org">dérive</a> |
+    </div>
+
+    <div>
+      <a href="/sitemap">site map</a>
+    </div>
+
+    </nav>
+    <h1><a href="/">shrub <span id="headerSubTitle">has a website</span></a></h1>
+</header>
+
+    <nav id="side-bar">
+        <div>
+<p class="sideBarTitle">stuff:</p>
+<ul>
+<li><a href="/art/">&rsaquo; art/</a></li>
+<li><a href="/links/">&rsaquo; links/</a></li>
+<li><a href="/words/" class="thisPage">&raquo;<i> words/</i></a></li>
+<li><ul>
+<li><a href="/words/pimp-my-libc">&rsaquo; pimp my libc</a></li>
+<li><a href="/words/static-linking" class="thisPage">&raquo;<i> static linking</i></a></li>
+</ul></li>
+</ul>
+        </div>
+    </nav>
+
+<article>
+<p>the state of statically linked linux in 2025</p>
+<p>21:51 15 jan 2026 </p>
+<p>for the last few months i have been working on https://derivelinux.org, which is going to be a linux distribution. i mean, it is a linux distribution, but i don't reccomend installing it [yet]. one of my aims is that i want it to be a 'real' distribution, without a dynamic linker. this is a bit of a pipe dream, and you need to do a lot of avoiding the problem to get the things you want. the pragmatic half of my brain knowns that at this stage in the game it is probably impossible to do this and have 99% of actual software, the real question is, why?</p>
+
+<p>ok, so the main thing is mesa. no dynamic loader on the system, 0% .so files, you can't have mesa. sorry, there are the trade-offs we make. i have seen someone pack mesa as an appbundle <a href="" />appimage alternative</a>, and anything else that uses dynamic loading, imlib2 etc, and no imlib2 means no feh, and you start to realize why no one puts themselves through this</p>
+<p>but no mesa means no wlroots, no <a href="" />real</a> are quite nice, minus the lack of subsurface support, which means no firefox, but that's a future blog post.</p>
+<p>i think i have proven that a usuable desktop system with static linking is possible, others have tried, like oasis linux, which has a base system and wayland via velox, but not much else, and reccomends you to use nix or pkgsrc to get any real software, which will inevitably lead to dynamic linking. we have... a little more than that, it's very usuable for someone like me, all i do is open acme, st, and use a browser usually, so if you are like me, it's not so bad. i have been using it for a bit of programming and reading over the past weeks.</p>
+<p>and, in terms of dynamic linking being bad, this just happened on my arch system, in case you wanted to know my reasoning for doing all this:</p>
+<code><pre>
+yay: error while loading shared libraries: libalpm.so.15: cannot open shared object file: No such file or directory
+</pre></code>
+</article>
+
+<footer>
+<div><a href="http://werc.cat-v.org/">powered by werc</a></div>
+</footer>
+</body></html>
