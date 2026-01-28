@@ -73,7 +73,7 @@ feature flags, eg &#8212;enable-thing
 high level build DSL that describes targets and sources, among other things
 </li>
 </ul>
-<p>i'm simplifying for the sake of brevity, but in a normal autotools build you would run automake to generate a Makefile.in, which is a makefile with certain variables unmarked as @VAR@, then run autoconf to generate a configure script, which checks for the presence of certain things in you system, substitues the correct values for @VAR@ into the Makefile.in as a Makefile. then you can pretty much run make as normal. i skipped about 5 steps here [aclocal, autoheader, libtoolize], and all in all this takes quite a while. don't write you're build systems in interpreted languages kids.</p>
+<p>i'm simplifying for the sake of brevity, but in a normal autotools build you would run automake to generate a Makefile.in, which is a makefile with certain variables unmarked as @VAR@, then run autoconf to generate a configure script, which checks for the presence of certain things in your system, substitutes the correct values for @VAR@ into the Makefile.in as a Makefile. then you can pretty much run make as normal. i skipped about 5 steps here [aclocal, autoheader, libtoolize], and all in all this takes quite a while. don’t write your build systems in interpreted languages, kids.</p>
 <p>ok, so how do we even begin to fix this? first i set out some goals:</p>
 <ul>
 <li>
@@ -87,13 +87,13 @@ skip all the bullshit in autotools which i don't even want to go into
 <p>hell consists of two tools, demiurge and satan. you can think of them as replacements for autoconf and automake respectively, although the way they work is pretty different.</p>
 <p>demiurge is essentially an autoconf scanner. it looks only  for 39 common macros that we actually need (like i said, skip all the bullshit), for example AC-CHECK-HEADERS. for that macro, it writes the list of all headers we need to check to a file called .demiurge. it also attempts to resolve as many undefined variables as possible. for common variables like CC etc, it sources a systemwide configuration file at /etc/satan.conf. this is in stark contrast to autoconf which favours gnu tools and always checks for them first, eg looking for bison before byacc. man these gnu guys make their software spread like cancer. for other varibales, it tries to resolve them too by looking at assignments, AC-SUBST values, and package vars from AC-INIT. all of this also gets written to .demiurge.</p>
 <p>ok, so now we have a list of variables and things we need to probe for, now what? now it's satan's turn!satan does two main things: first, it reads the list of things to probe for and runs the probes, in parralel, much faster than the autotools-generated configure script would. and i can probe it!</p>
-<p>here is the results for time ./configure when building libarchive:</p>
+<p>here are the results for time ./configure when building libarchive:</p>
 <code><pre>
 real	0m17.151s
 user	0m9.933s
 sys	0m7.360s
 </pre></code>
-<p>and here is the results for the command time satan gen:</p>
+<p>and here are the results for the command time satan gen:</p>
 <code><pre>
 real	0m1.983s
 user	0m10.881s
