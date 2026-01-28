@@ -55,7 +55,18 @@
 <p>so, when working on my 100% non-gnu linux distribution, <a href="https://derivelinux.org">dérive</a>, i was faced with a choice; accept that gnu autotools is an unavoidable dependency that i will just have to accept, or spend hundreds of hours of my life writing a drop-in replacement. i chose the latter. it is called hell.</p>
 <p>to explain how hell works, you need to have a basic understanding of how autotools works, so i will provide a brief synopsis:</p>
 <p>in an autotools build, there are two seed files, configure.ac and Makefile.am. </p>
-<p>configure.ac:   - written in the m4 macro language - describes what headers, functions, types, libraries, and tools need to be present on the system - descibes what outputs to generate, eg Makefile, config.h - feature flags, eg &#8212;enable-thing</p>
+<p>configure.ac</p>
+<ul>
+<li>
+written in the m4 macro language
+</li><li>
+describes what headers, functions, types, libraries, and tools need to be present on the system
+</li><li>
+descibes what outputs to generate, eg Makefile, config.h
+</li><li>
+feature flags, eg &#8212;enable-thing
+</li>
+</ul>
 <p>Makefile.am</p>
 <ul>
 <li>
