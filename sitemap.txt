@@ -1,5 +1,6 @@
 https://stuff.shrub.industries/art/
 https://stuff.shrub.industries/links/
 https://stuff.shrub.industries/words/
+https://stuff.shrub.industries/words/hell
 https://stuff.shrub.industries/words/pimp-my-libc
 https://stuff.shrub.industries/words/static-linking
