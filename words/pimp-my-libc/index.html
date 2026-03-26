@@ -6,6 +6,7 @@
 
     <link rel="stylesheet" href="/pub/style/style.css" type="text/css" media="screen, handheld" title="default">
     <link rel="shortcut icon" href="/favicon.ico" type="image/vnd.microsoft.icon">
+    <link rel="stylesheet" href="/_werc/pub/style.css" type="text/css" media="screen" title="default">
 
     <meta charset="UTF-8">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
@@ -56,7 +57,7 @@
 <p>next on the list was libm, i replaced with stuff from core-math, it was a big headache, and a lot of the functions were slower, but a few of them were faster, although nothing major. then i replaced all string/memory functions with the freebsd implementations, which was a bit more complex to wire up. this was a pretty big speed increase on all fronts, probably due to it using sse2. i wanted to micro-optimize even further, so i added memset, memcpy and memmove from googles bionic libc, because freebsd doesn’t have sse2 for those functions. </p>
 <p>overall, the speed increase is 5-7x on malloc operations, and 1.5-2x on string operations. everything else is a small (but negligible) increase. </p>
 <p>at some point in the future i will add some scientific benchmarks to this post, i’m sorry, i forgot to save them, so you’ll just have to trust me :) </p>
-<p>for those interested, the repo is available at https://codeberg.org/shrub900/shrusl</p>
+<p>for those interested, the repo is available at <a href="https://codeberg.org/shrub900/shrusl">codeberg</a></p>
 
 </article>
 
